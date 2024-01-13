@@ -1,0 +1,239 @@
+[
+  [
+    {
+      "userId": 1,
+      "id": 1,
+      "created_date": "2023-05-02T18:31:28+0000",
+      "title": "JavaScript",
+      "body": "JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm, single-threaded, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript's dynamic capabilities include runtime object construction, variable parameter lists, function variables, dynamic script creation (via eval), object introspection (via for...in and Object utilities), and source-code recovery (JavaScript functions store their source text and can be retrieved through toString()). This section is dedicated to the JavaScript language itself, and not the parts that are specific to Web pages or other host environments. For information about APIs that are specific to Web pages, please see Web APIs and DOM. The standards for JavaScript are the ECMAScript Language Specification (ECMA-262) and the ECMAScript Internationalization API specification (ECMA-402). As soon as one browser implements a feature, we try to document it. This means that cases where some proposals for new ECMAScript features have already been implemented in browsers, documentation and examples in MDN articles may use some of those new features. Most of the time, this happens between the stages 3 and 4, and is usually before the spec is officially published. Do not confuse JavaScript with the Java programming language — JavaScript is not 'Interpreted Java'. Both 'Java' and 'JavaScript' are trademarks or registered trademarks of Oracle in the U.S. and other countries. However, the two programming languages have very different syntax, semantics, and use. JavaScript documentation of core language features (pure ECMAScript, for the most part) includes the following:"
+    },
+		{
+      "userId": 8,
+      "id": 2,
+      "created_date": "2023-05-02T18:31:28+0000",
+      "title": "10 Expert Performance Tips Every Senior JS React Developer Should Know",
+			"body": "Hey, senior JS React developers! Are you looking to take your skills to the next level and optimize your React applications for top-notch performan You’re in the right place! In this article, I’ll share with you 10 expert performance tips that will supercharge your React development. Get ready to optimize, streamline, and make your apps lightning-fast. Let’s dive in! Use Functional Components and React Ho Functional components with React Hooks offer better performance compared to class components."
+    },
+		{
+      "userId": 3,
+      "id": 3,
+      "created_date": "2023-05-02T18:31:28+0000",
+      "title": "Мальчик со шпагой",
+			"body": "«Ма́льчик со шпа́гой» — роман-трилогия Владислава Крапивина о детском отряде «Эспада», написанный в 1972—1974 годах. Роман входит в более крупную трилогию «Паруса „Эспады“», включающую также романы «Бронзовый мальчик» (1992) и «Рыжее знамя упрямства» (2005). Первоначально печатался в журнале «Пионер» в 1973—1975 годах, отдельное издание вышло в 1981 году. Впоследствии неоднократно переиздавался. В романе наиболее полно раскрывается мировоззрение писателя и его представление о ребёнке."
+    },
+		{
+      "userId": 2,
+      "id": 4,
+      "created_date": "2023-05-02T18:31:28+0000",
+      "title": "Научные статьи",
+			"body": "Научная статья — законченное авторское произведение, описывающее результаты оригинального научного исследования (первичная научная статья) или посвящённая рассмотрению ранее опубликованных научных статей, связанных общей темой (обзорная научная статья). В первичных научных статьях авторами излагается существенная информация о проведённом исследовании в форме, позволяющей другим членам научного сообщества оценить исследование, воспроизвести эксперименты, а также оценить рассуждения и сделанные из них выводы. Обзорные научные статьи предназначены для обобщения, анализа, оценки, суммирования или синтеза ранее опубликованной информации (первичных научных публикаций). Нередко научная статья сочетает в себе эти два типа научных текстов, включая обзорную и оригинальную части. В настоящее время основным представлением для научной статьи является печатная форма. Эта ситуация постепенно меняется – некоторые издательства наряду с выпуском печатного номера журнала выкладывают тексты опубликованных научных статей в интернет в свободный доступ. Однако в большинстве случаев это делается для подписчиков или на платной основе, что означает фактическое отсутствие статей в интернете и затрудняет поиск научной информации для исследователя."
+    },
+		{
+      "userId": 6,
+      "id": 5,
+      "created_date": "2023-05-02T18:31:28+0000",
+      "title": "Только ночь оказалась долгой",
+			"body": "Каждый из нас понимает очевидную вещь: дальнейшее развитие различных форм деятельности играет определяющее значение для глубокомысленных рассуждений. Однозначно, элементы политического процесса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и должны быть своевременно верифицированы. Мы вынуждены отталкиваться от того, что перспективное планирование создаёт необходимость включения в производственный план целого ряда внеочередных мероприятий с учётом комплекса поставленных обществом задач!"
+    }
+  ],
+
+  [
+    {
+      "id": "1",
+      "username": "zapgratis",
+      "name": "Mariam Carey",
+      "first_name": "Mariam",
+      "last_name": "Carey",
+      "email": "chronos@optonline.net",
+      "bio": "Ah, I just love the whooshing sound that deadlines make as they fly by.",
+      "location": "Berkeley, US",
+      "total_likes": 20,
+      "followers_count": 300,
+      "following_count": 25,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "2",
+      "username": "donnerheinz",
+      "name": "Leigh Bernard",
+      "first_name": "Leigh",
+      "last_name": "Bernard",
+      "email": "leighbernard@gmail.com",
+      "bio": "Hello, it's me Leigh Bernard, awesome to see you here. I recently moved from Korea North, however now I live in Krommeniedijk. I like it here, it is awesome. I can tell you more, for example, my job is materials engineer, I have various hobbies, one of them is matchstick modeling. Music is my life, I often listen to contemporary blues and I can't imagine my life without books, I love Laches. I admire video games like Space Invaders, I love to watch various shows as well, right now I am watching The Naked Truth (1995–1998), comedy, it is really good, both story and acting. Just in case you want to contact me leighbernard@gmail.com",
+      "location": "Calcena, ES",
+      "total_likes": 453,
+      "followers_count": 2456,
+      "following_count": 314,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "3",
+      "username": "pumpkinflamingo",
+      "name": "Monica Hawkins",
+      "first_name": "Monica",
+      "last_name": "Hawkins",
+      "email": "linuxhack@att.net",
+      "bio": "All this time, I thought I wanted a job. Turns out, I just wanted a paycheck.",
+      "location": "Villaprovedo, ES",
+      "total_likes": 343,
+      "followers_count": 256,
+      "following_count": 12,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "4",
+      "username": "brokenmonitor",
+      "name": "Pricilla Haggard",
+      "first_name": "Pricilla",
+      "last_name": "Haggard",
+      "email": "pricillahaggard@gmail.com",
+      "bio": "Hello, it's me Pricilla Haggard, I am happy to see you here. I'm from Monaco, recently I moved to Ruakaka. I like my new place and this city. I see you want to know more about me... okay, my job is corporate treasurer, I have a personal life as well, I like garage saleing. Apart from it, I am a huge fan of music, music like deep house and I love reading, my favorite book is Categories. My number one PC game is Tetris, I learn a lot from TV shows like Peyton Place (1964–1969), soap opera, it is really good, both story and acting. Stay in touch via my email pricillahaggard@gmail.com",
+      "location": "Pa Mok, TH",
+      "total_likes": 578,
+      "followers_count": 3402,
+      "following_count": 126,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "5",
+      "username": "tomatooccipital",
+      "name": "Jamey Wynn",
+      "first_name": "Jamey",
+      "last_name": "Wynn",
+      "email": "jameywynn@gmail.com",
+      "bio": "Hi there, it's me Jamey Wynn, add me to your friend list. I'm from Solomon Islands, but right now, I live in Wiota. I like it here, it is awesome. Still want to know more? My work is about counsel advocate, my hobby is associated with grip strength. What kind of music do you like? I like chicago blues and I also love to read books, my favorite one is A Midsummer Night's Dream. Do you love games? My favorite one is Super Smash Bros. Melee, a lot of my free time is taken by TV shows as well, currently, I am watching 3AM (2015) – Reality, it is pretty interesting. Contact me from the following address jameywynn@gmail.com",
+      "location": "Hong, NG",
+      "total_likes": 1203,
+      "followers_count": 6374,
+      "following_count": 86,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "6",
+      "username": "radicalfloor",
+      "name": "Julian Farris",
+      "first_name": "Julian",
+      "last_name": "Farris",
+      "email": "julianfarris@gmail.com",
+      "bio": "Interested in me I see, my name is Julian Farris, invite me to your friend circle. I was living in Georgia, meantime I live in Mortinsart. I like it here, it is awesome. Do you want to hear about my job? It is actually boring, I am care assistant - older people, I have various hobbies, one of them is becoming a child advocate. I love to listen to soul blues and I also love to read books, my favorite one is Electra. After a long day at work, I love to play Bubble Bobble, I love to watch TV shows like What's Up! Que Pasa (2007–2008), children's educational program, it is so cool, watch it, you will love it for sure. If you want to talk contact me at julianfarris@gmail.com",
+      "location": "Moscow, RU",
+      "total_likes": 2434,
+      "followers_count": 6475,
+      "following_count": 34,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "7",
+      "username": "vigorousrip",
+      "name": "Margo Petersen",
+      "first_name": "Margo",
+      "last_name": "Petersen",
+      "email": "margoptrsn@gmail.com",
+      "bio": "Avoid following the masses blindly. Every so often, the 'm' in 'masses' is silent.",
+      "location": "St. Petersburg, RU",
+      "total_likes": 244,
+      "followers_count": 475,
+      "following_count": 48,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "8",
+      "username": "aliskhannn",
+      "name": "Aliskhan Khutiev",
+      "first_name": "Aliskhan",
+      "last_name": "Khutiev",
+      "email": "aliskhanreventon@gmail.com",
+      "bio": "Frontend-разработчик с опытом практического программирования 2+ года. Все это время обучался, создавал свои проекты и работал на фриланс биржах. Интересуюсь информационными технологиями и как они меняют мир. Легко осваиваю новую информацию.",
+      "location": "Magas, ING",
+      "total_likes": 3456,
+      "followers_count": 8798,
+      "following_count": 228,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "9",
+      "username": "wastefulillfated",
+      "name": "Magnolia Bennett",
+      "first_name": "Magnolia",
+      "last_name": "Bennett",
+      "email": "magnoliabenn@gmail.com",
+      "bio": "Beauty is only skin deep. But ugly? Ah, that goes all the way to the bone!",
+      "location": "New York, US",
+      "total_likes": 356,
+      "followers_count": 898,
+      "following_count": 248,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    },
+    {
+      "id": "10",
+      "username": "germantasty",
+      "name": "Julianna Rush",
+      "first_name": "Julianna",
+      "last_name": "Rush",
+      "email": "juliannaarush@gmail.com",
+      "bio": "Chocolate never asks questions. Chocolate understands.",
+      "location": "Berlin, DE",
+      "total_likes": 185,
+      "followers_count": 312,
+      "following_count": 28,
+      "profile_image": {
+        "small": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=32&w=32",
+        "medium": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=64&w=64",
+        "large": "https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128"
+      }
+    }
+  ],
+
+  [
+    {
+      "userId": 1,
+      "postId": 1,
+      "id": 1,
+      "created_date": "2023-05-02T18:31:28+0000",
+      "body": "End of the story, just like that my favorite TV show ended and it left a big void in my heart…"
+    },
+    {
+      "userId": 2,
+      "postId": 1,
+      "id": 1,
+      "created_date": "2023-02-15T08:12:48+0000",
+      "body": "I clean my house from dust every day, but to no avail, it gets dirty in no time again."
+    }
+  ]
+]

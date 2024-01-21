@@ -1,28 +1,38 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts, selectAllPosts } from "../store/slices/PostsSlice";
+import { getPosts, selectAllPosts } from "../store/slices/posts/postsSlice";
 import PostsItem from "./PostsItem";
+import "react-loading-skeleton/dist/skeleton.css";
+import PostSkeleton from "./UI/skeleton/PostSkeleton";
 
 const PostsList = () => {
   const dispatch = useDispatch();
-
   const posts = useSelector(selectAllPosts);
-  const postsStatus = useSelector((state) => state.posts.status);
+  const postsStatus = useSelector((state) => state.posts.posts.status);
 
   useEffect(() => {
     if (postsStatus === "idle") {
       dispatch(getPosts());
     }
-    console.log(posts);
-  }, [posts, postsStatus, dispatch]);
+  }, []);
+
+  // <div className="loader w-14 p-2 rounded-full bg-indigo-600"></div>
 
   return (
-    <div className="flex items-center">
-      <ul className="flex items-center flex-col gap-12">
-        {posts.map((post) => (
-          <PostsItem key={post.id} post={post} />
-        ))}
-      </ul>
+    <div className="flex justify-center">
+      {postsStatus === "loading" ? (
+        <div className="flex items-center flex-col gap-12 w-1/2">
+          {[...Array(1, 2, 3, 4, 5)].map((n) => (
+            <PostSkeleton key={n} />
+          ))}
+        </div>
+      ) : (
+        <ul className="posts-list flex items-center flex-col gap-12">
+          {posts.map((post) => (
+            <PostsItem key={post.id} post={post} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

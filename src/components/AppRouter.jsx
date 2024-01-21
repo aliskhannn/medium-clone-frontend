@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "../routes/Root";
 import ErrorPage from "../routes/ErrorPage";
 import HomeView from "../routes/HomeView";
+import SinglePostPage from "../routes/SinglePostPage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
         index: true,
         element: <HomeView />,
       },
+			{
+				path: 'posts/:id',
+				element: <SinglePostPage />
+			}
     ],
   },
 ]);

@@ -1,26 +1,44 @@
+import { BookmarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { useGetReadingTime } from "../hooks/useGetReadingTime";
+import { useGetFormattedDate } from "../hooks/useGetPostCreatedDate";
+
 const PostsItem = ({ post }) => {
+  const readingTime = useGetReadingTime(post?.body);
+  const postCreatedDate = useGetFormattedDate(post?.created_date);
+
   return (
-    <div className="flex flex-col gap-3 w-1/2">
+    <div className="posts-item flex flex-col w-full">
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2">
           <img
             className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
-            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src={post?.user?.profile_image?.thumbnail}
             alt=""
           />
-          <span>Kostya Stepanov in UX Planet</span>
+          <span className="text-gray-950">{post?.user?.name}</span>
         </div>
-        <span>|</span>
-        <div>Oct 17, 2023</div>
+        <span className="text-gray-500">&#183;</span>
+        <Link to={`posts/${post.id}`}>
+          <span className="text-gray-500">{postCreatedDate}</span>
+        </Link>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <span>Back-End & Web Development Trends For 2024</span>
-        <p>
-          By Mary Moore, copywriter at Shakuro The ever-shifting landscape of
-          digital innovation can feel like a relentless race, a whirlwind of
-          challenges and opportunities. Your pains as a developer are real — the...
-        </p>
+      <Link to={`posts/${post.id}`} className="mt-3">
+        <div className="flex flex-col gap-2 cursor-pointer">
+          <span className="text-xl font-bold">{post.title}</span>
+          <div>
+            <p className="h-full max-h-24 text-ellipsis overflow-y-hidden text-base">
+              {post.body.substr(0, 250)}
+            </p>
+          </div>
+        </div>
+      </Link>
+
+      <div className="flex items-center justify-between mt-6">
+        <span className="text-neutral-500">{readingTime} min read</span>
+        <BookmarkIcon className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer" />
+        {/* <BookmarkSlashIcon className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer" /> */}
       </div>
     </div>
   );

@@ -5,6 +5,10 @@ import {
   PencilSquareIcon,
   MagnifyingGlassIcon,
   BellIcon,
+  Cog8ToothIcon,
+	BookmarkSquareIcon,
+	UserCircleIcon,
+	ArrowLeftStartOnRectangleIcon
 } from "@heroicons/react/24/outline";
 
 function classNames(...classes) {
@@ -14,7 +18,7 @@ function classNames(...classes) {
 const Header = () => {
   return (
     <header className="h-16 w-full bg-gray-800">
-      <div className="container">
+      <div className="h-full w-3/4 mx-auto">
         <div className="flex items-center h-full">
           <img
             className="h-8 w-auto"
@@ -22,7 +26,7 @@ const Header = () => {
             alt="Your Company"
           />
           <div className="ml-6 relative">
-            <MagnifyingGlassIcon className="search-icon h-5 w-5 absolute top-2.5 left-3" />
+            <MagnifyingGlassIcon className="h-5 w-5 absolute top-2.5 left-3 text-white" />
             <input
               type="text"
               placeholder="Search"
@@ -30,7 +34,7 @@ const Header = () => {
             />
           </div>
           <div className="flex items-center gap-5 ml-auto">
-            <button className="flex items-center justify-center gap-1 h-8 w-26 rounded bg-indigo-500 hover:bg-indigo-400 text-white text-sm ease-in duration-100">
+            <button className="flex items-center justify-center gap-1 h-10 w-28 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm ease-in duration-100">
               <PencilSquareIcon className="h-4 w-4" />
               New Post
             </button>
@@ -63,9 +67,10 @@ const Header = () => {
                         href="#"
                         className={classNames(
                           active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
+                          "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
                         )}
                       >
+												<UserCircleIcon className="h-5 w-5" />
                         Your Profile
                       </a>
                     )}
@@ -76,9 +81,24 @@ const Header = () => {
                         href="#"
                         className={classNames(
                           active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
+                          "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
                         )}
                       >
+												<BookmarkSquareIcon className="h-5 w-5" />
+                        Library
+                      </a>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a
+                        href="#"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        <Cog8ToothIcon className="h-5 w-5" />
                         Settings
                       </a>
                     )}
@@ -89,9 +109,10 @@ const Header = () => {
                         href="#"
                         className={classNames(
                           active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
+                          "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
                         )}
                       >
+												<ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
                         Sign out
                       </a>
                     )}

@@ -3,6 +3,7 @@ import Root from "../routes/Root";
 import ErrorPage from "../routes/ErrorPage";
 import HomeView from "../routes/HomeView";
 import SinglePostPage from "../routes/SinglePostPage";
+import EditPage from "../routes/EditPage";
 
 const router = createBrowserRouter([
   {
@@ -14,10 +15,14 @@ const router = createBrowserRouter([
         index: true,
         element: <HomeView />,
       },
-			{
-				path: 'posts/:id',
-				element: <SinglePostPage />
-			}
+      {
+        path: "posts/:id",
+        element: <SinglePostPage />,
+      },
+      {
+        path: "/edit",
+        element: <EditPage />,
+      },
     ],
   },
 ]);

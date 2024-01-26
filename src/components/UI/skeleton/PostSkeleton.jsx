@@ -22,7 +22,7 @@ const PostSkeleton = () => {
           variant="text"
           width={250}
           height={10}
-          sx={{ fontSize: "1rem" }}
+          sx={{ fontSize: "1.25rem" }}
         />
         <div>
           <Skeleton

@@ -12,11 +12,62 @@ $main-color-light: #6366f1;
 }
 
 .container {
-  // max-width: 1200px;
-  max-width: 615px;
+  max-width: 650px;
   padding: 0 15px;
   margin: 0 auto;
   height: 100%;
+}
+
+.edit-page-container {
+  max-width: 700px;
+  padding: 0 15px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.edit-page {
+  h1 {
+    font-size: 34px;
+    outline: none;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 22px;
+  }
+  h5 {
+    font-size: 20px;
+  }
+  h6 {
+    font-size: 18px;
+  }
+  a {
+    text-decoration: underline;
+  }
+
+  .ce-paragraph {
+    cursor: text;
+  }
+
+  [contenteditable="true"]:empty:not(:focus):before {
+    content: attr(data-placeholder);
+    color: grey;
+    pointer-events: none;
+  }
+}
+
+.post-page {
+  a {
+    text-decoration: underline;
+  }
+
+	ul {
+		list-style: unset;
+	}
 }
 
 .loader {

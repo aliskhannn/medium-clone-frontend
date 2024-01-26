@@ -19,20 +19,22 @@ const PostsList = () => {
   // <div className="loader w-14 p-2 rounded-full bg-indigo-600"></div>
 
   return (
-    <div className="flex justify-center">
-      {postsStatus === "loading" ? (
-        <div className="flex items-center flex-col gap-12 w-1/2">
-          {[...Array(1, 2, 3, 4, 5)].map((n) => (
-            <PostSkeleton key={n} />
-          ))}
-        </div>
-      ) : (
-        <ul className="posts-list flex items-center flex-col gap-12">
-          {posts.map((post) => (
-            <PostsItem key={post.id} post={post} />
-          ))}
-        </ul>
-      )}
+    <div className="container">
+      <div className="flex justify-center">
+        {postsStatus === "loading" ? (
+          <div className="flex items-center flex-col gap-12 w-full">
+            {[...Array(1, 2, 3)].map((n) => (
+              <PostSkeleton key={n} />
+            ))}
+          </div>
+        ) : (
+          <ul className="posts-list flex items-center flex-col gap-12">
+            {posts.map((post) => (
+              <PostsItem key={post.id} post={post} />
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

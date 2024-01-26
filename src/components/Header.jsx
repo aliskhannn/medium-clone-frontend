@@ -6,16 +6,19 @@ import {
   MagnifyingGlassIcon,
   BellIcon,
   Cog8ToothIcon,
-	BookmarkSquareIcon,
-	UserCircleIcon,
-	ArrowLeftStartOnRectangleIcon
+  BookmarkSquareIcon,
+  UserCircleIcon,
+  ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+import { Link, useLocation } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Header = () => {
+  const location = useLocation();
+
   return (
     <header className="h-16 w-full bg-gray-800">
       <div className="h-full w-3/4 mx-auto">
@@ -25,7 +28,11 @@ const Header = () => {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
             alt="Your Company"
           />
-          <div className="ml-6 relative">
+          <div
+            className={`ml-6 relative ${
+              location.pathname === "/edit" ? "hidden" : ""
+            }`}
+          >
             <MagnifyingGlassIcon className="h-5 w-5 absolute top-2.5 left-3 text-white" />
             <input
               type="text"
@@ -34,9 +41,22 @@ const Header = () => {
             />
           </div>
           <div className="flex items-center gap-5 ml-auto">
-            <button className="flex items-center justify-center gap-1 h-10 w-28 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm ease-in duration-100">
-              <PencilSquareIcon className="h-4 w-4" />
-              New Post
+            <Link to={"/edit"}>
+              <button
+                className={`flex items-center justify-center gap-1 h-10 w-28 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm ease-in duration-100 ${
+                  location.pathname === "/edit" ? "hidden" : ""
+                }`}
+              >
+                <PencilSquareIcon className="h-4 w-4" />
+                New Post
+              </button>
+            </Link>
+            <button
+              className={`flex items-center justify-center bg-green-600 text-white px-3 rounded-2xl ${
+                location.pathname === "/edit" ? "block" : "hidden"
+              }`}
+            >
+              Publish
             </button>
             <BellIcon className="h-6 w-6 text-slate-400 hover:text-white ease-in duration-100 cursor-pointer" />
             <Menu as="div" className="relative">
@@ -70,7 +90,7 @@ const Header = () => {
                           "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
                         )}
                       >
-												<UserCircleIcon className="h-5 w-5" />
+                        <UserCircleIcon className="h-5 w-5" />
                         Your Profile
                       </a>
                     )}
@@ -84,7 +104,7 @@ const Header = () => {
                           "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
                         )}
                       >
-												<BookmarkSquareIcon className="h-5 w-5" />
+                        <BookmarkSquareIcon className="h-5 w-5" />
                         Library
                       </a>
                     )}
@@ -112,7 +132,7 @@ const Header = () => {
                           "flex items-center gap-2 px-4 py-2 text-sm text-gray-700"
                         )}
                       >
-												<ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
+                        <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
                         Sign out
                       </a>
                     )}

@@ -23,5 +23,5 @@ export const useGetFormattedDate = (date) => {
 		}${parsedDate.getFullYear() === currentYear ? "" : ', ' + parsedDate.getFullYear()
 		}`;
 
-	return formattedDate
+	return formattedDate;
 }

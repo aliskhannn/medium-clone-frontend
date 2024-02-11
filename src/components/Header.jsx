@@ -1,5 +1,4 @@
-// bg-gray-800
-import { Fragment } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import {
   PencilSquareIcon,
@@ -10,14 +9,94 @@ import {
   UserCircleIcon,
   ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { RootContext } from "../routes/Root";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewPost, getPostsByQuery } from "../store/slices/posts/postsSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Header = () => {
+  const {
+    query,
+    setQuery,
+    ejInstance,
+    data,
+    postCreatedDate,
+    title,
+    contentIsNotEmpty,
+  } = useContext(RootContext);
+
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.users.user.item);
+
+  const [requestStatus, setRequestStatus] = useState("idle");
+
+  const inputRef = useRef();
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      if (location.pathname !== "/search")
+        navigate({
+          pathname: "search",
+          search: createSearchParams({
+            q: query,
+          }).toString(),
+        });
+      if (location.pathname === "/search") {
+        dispatch(getPostsByQuery(query));
+        setSearchParams({ q: query });
+      }
+    }
+  };
+
+  const canPublish =
+    [title, contentIsNotEmpty].every(Boolean) && requestStatus === "idle";
+
+  const handlePublish = () => {
+    if (canPublish) {
+      try {
+        setRequestStatus("pending");
+        ejInstance.current
+          .save()
+          .then((outputData) => {
+            postCreatedDate.current = new Date();
+						console.log(outputData)
+            dispatch(
+              addNewPost({
+                created_date: postCreatedDate.current,
+                likes: 0,
+                liked_by_user: false,
+                title,
+                body: outputData,
+                user: currentUser,
+              })
+            ).unwrap();
+          })
+          .catch((error) => {
+            console.log("Saving failed: ", error);
+          });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setRequestStatus("idle");
+      }
+    }
+  };
 
   return (
     <header className="h-16 w-full bg-gray-800">
@@ -37,6 +116,10 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyPress}
+              ref={inputRef}
               className="search-input h-10 w-96 rounded pl-10 pb-0.5 text-white bg-gray-700 outline-none ease-in duration-100"
             />
           </div>
@@ -52,9 +135,11 @@ const Header = () => {
               </button>
             </Link>
             <button
-              className={`flex items-center justify-center bg-green-600 text-white px-3 rounded-2xl ${
-                location.pathname === "/edit" ? "block" : "hidden"
-              }`}
+              className={`flex items-center justify-center text-white px-3 rounded-2xl transition-all ${
+                canPublish ? "bg-green-600" : "bg-green-700"
+              } ${location.pathname === "/edit" ? "block" : "hidden"}`}
+              onClick={handlePublish}
+              disabled={!canPublish}
             >
               Publish
             </button>

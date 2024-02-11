@@ -1,17 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   getPostById,
+  likePost,
   selectSinglePost,
 } from "../store/slices/posts/postsSlice";
 import { useGetReadingTime } from "../hooks/useGetReadingTime";
 import { useGetFormattedDate } from "../hooks/useGetPostCreatedDate";
+import { useFormatNumber } from "../hooks/useFormatNumber";
 import {
   HandThumbUpIcon,
   ChatBubbleOvalLeftIcon,
   BookmarkIcon,
 } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon as HandThumbUpSolidIcon } from "@heroicons/react/24/solid";
 import SinglePostPageSkeleton from "../components/UI/skeleton/SinglePostPageSkeleton";
 import { Tooltip } from "antd";
 import Output from "editorjs-react-renderer";
@@ -24,7 +27,7 @@ const styles = {
   list: {
     listItem: {
       fontSize: "18px",
-      marginLeft: "30px"
+      marginLeft: "30px",
     },
   },
 };
@@ -32,16 +35,31 @@ const styles = {
 const SinglePostPage = () => {
   const { id } = useParams();
 
+  const [likes, setLikes] = useState(null);
+  const [liked, setLiked] = useState(false);
+
   const dispatch = useDispatch();
   const post = useSelector(selectSinglePost);
   const postStatus = useSelector((state) => state.posts.post.status);
 
-  const readingTime = useGetReadingTime(post?.body);
+  const readingTime = 2;
   const postCreatedDate = useGetFormattedDate(post?.created_date);
+  const likesCount = useFormatNumber(post?.likes);
 
   useEffect(() => {
     dispatch(getPostById(id));
   }, []);
+
+  const handleLike = () => {
+    dispatch(
+      likePost({
+        id: post.id,
+        likesCount: post.likes,
+        liked_by_user: post?.liked_by_user,
+      })
+    );
+    setLiked(!liked);
+  };
 
   return (
     <div className="post-page">
@@ -75,7 +93,17 @@ const SinglePostPage = () => {
                 <div className="flex gap-4">
                   <div className="flex items-center gap-1">
                     <Tooltip placement="top" title="Like" mouseEnterDelay={0.5}>
-                      <HandThumbUpIcon className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer" />
+                      {post?.liked_by_user ? (
+                        <HandThumbUpSolidIcon
+                          onClick={handleLike}
+                          className="h-5 w-5 text-neutral-900 ease-in duration-100 cursor-pointer"
+                        />
+                      ) : (
+                        <HandThumbUpIcon
+                          onClick={handleLike}
+                          className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer"
+                        />
+                      )}
                     </Tooltip>
                     <Tooltip
                       placement="top"
@@ -83,7 +111,7 @@ const SinglePostPage = () => {
                       mouseEnterDelay={0.5}
                     >
                       <span className="text-xs font-semibold text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer">
-                        1.1K
+                        {likesCount}
                       </span>
                     </Tooltip>
                   </div>
@@ -111,7 +139,17 @@ const SinglePostPage = () => {
                 <div className="flex gap-4">
                   <div className="flex items-center gap-1">
                     <Tooltip placement="top" title="Like" mouseEnterDelay={0.5}>
-                      <HandThumbUpIcon className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer" />
+                      {post?.liked_by_user ? (
+                        <HandThumbUpSolidIcon
+                          onClick={handleLike}
+                          className="h-5 w-5 text-neutral-900 ease-in duration-100 cursor-pointer"
+                        />
+                      ) : (
+                        <HandThumbUpIcon
+                          onClick={handleLike}
+                          className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer"
+                        />
+                      )}
                     </Tooltip>
                     <Tooltip
                       placement="top"
@@ -119,7 +157,7 @@ const SinglePostPage = () => {
                       mouseEnterDelay={0.5}
                     >
                       <span className="text-xs font-semibold text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer">
-                        1.1K
+                        {likesCount}
                       </span>
                     </Tooltip>
                   </div>

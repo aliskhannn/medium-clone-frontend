@@ -3,18 +3,16 @@ import { Link } from "react-router-dom";
 // import { useGetReadingTime } from "../hooks/useGetReadingTime";
 import { useGetFormattedDate } from "../hooks/useGetPostCreatedDate";
 import { Tooltip } from "antd";
-import { useEffect } from "react";
+import { ParagraphOutput } from "editorjs-react-renderer";
 
 const PostsItem = ({ post }) => {
   // const readingTime = useGetReadingTime(post?.body);
   const readingTime = 2;
   const postCreatedDate = useGetFormattedDate(post?.created_date);
 
-  const paragraphs = post?.body?.blocks.filter(
-    (block) => block.type === "paragraph"
-  );
-
-  const textPreview = paragraphs.map((p) => p.data.text).toString();
+  const paragraphData = {
+    text: `${post?.body?.blocks[0]?.data?.text.substr(0, 250)}...`,
+  };
 
   return (
     <div className="posts-item flex flex-col w-full">
@@ -28,18 +26,19 @@ const PostsItem = ({ post }) => {
           <span className="text-gray-950">{post?.user?.name}</span>
         </div>
         <span className="text-gray-500">&#183;</span>
-        <Link to={`posts/${post.id}`}>
+        <Link to={`/${post.id}`}>
           <span className="text-gray-500">{postCreatedDate}</span>
         </Link>
       </div>
 
-      <Link to={`posts/${post.id}`} className="mt-3">
+      <Link to={`/${post.id}`} className="mt-3">
         <div className="flex flex-col gap-2 cursor-pointer">
           <span className="text-xl font-bold">{post.title}</span>
           <div>
-            <p className="h-full max-h-24 text-ellipsis overflow-y-hidden text-base">
-              {textPreview.substr(0, 250)}
-            </p>
+            <ParagraphOutput
+              data={paragraphData}
+              classNames="post-content h-full max-h-24 font-normal overflow-hidden text-base"
+            />
           </div>
         </div>
       </Link>

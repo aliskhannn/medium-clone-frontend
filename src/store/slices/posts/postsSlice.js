@@ -11,6 +11,11 @@ const initialState = {
 		item: {},
 		status: 'idle',
 		error: null
+	},
+	searchedPosts: {
+		items: [],
+		status: 'idle',
+		error: null
 	}
 }
 
@@ -24,9 +29,18 @@ export const getPostById = createAsyncThunk('posts/getPostById', async (id) => {
 	return response.data
 })
 
+export const getPostsByQuery = createAsyncThunk('posts/getPostsByQuery', async (query) => {
+	const response = await axios.get(`https://841be80de5fa8609.mokky.dev/posts?title=*${query}`)
+	return response.data
+})
+
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (newPost) => {
 	const response = await axios.post('https://841be80de5fa8609.mokky.dev/posts', newPost)
-	console.log(newPost)
+	return response.data
+})
+
+export const likePost = createAsyncThunk('posts/likePost', async ({ id, likesCount, liked_by_user }) => {
+	const response = await axios.patch(`https://841be80de5fa8609.mokky.dev/posts/${id}`, { likes: liked_by_user ? likesCount - 1 : likesCount + 1, liked_by_user: !liked_by_user })
 	return response.data
 })
 
@@ -58,6 +72,17 @@ const postsSlice = createSlice({
 				state.post.status = 'failed'
 				state.post.error = action.error.message
 			})
+			.addCase(getPostsByQuery.pending, (state) => {
+				state.searchedPosts.status = 'loading'
+			})
+			.addCase(getPostsByQuery.fulfilled, (state, action) => {
+				state.searchedPosts.status = 'succeeded'
+				state.searchedPosts.items = action.payload
+			})
+			.addCase(getPostsByQuery.rejected, (state, action) => {
+				state.searchedPosts.status = 'failed'
+				state.searchedPosts.error = action.error.message
+			})
 			.addCase(addNewPost.fulfilled, (state, action) => {
 				state.posts.items.push(action.payload)
 			})
@@ -66,5 +91,6 @@ const postsSlice = createSlice({
 
 export const selectAllPosts = (state) => state.posts.posts.items
 export const selectSinglePost = (state) => state.posts.post.item
+export const selectAllSearchedPosts = (state) => state.posts.searchedPosts.items
 
 export default postsSlice.reducer

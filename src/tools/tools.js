@@ -23,7 +23,15 @@ export const EDITOR_JS_TOOLS = {
 	warning: Warning,
 	code: Code,
 	linkTool: LinkTool,
-	image: Image,
+	image: {
+		class: Image,
+		config: {
+			endpoints: {
+				byFile: 'http://localhost:5173/uploadFile', // Your backend file uploader endpoint
+				byUrl: 'http://localhost:5173/fetchUrl', // Your endpoint that provides uploading by Url
+			}
+		}
+	},
 	raw: Raw,
 	header: {
 		class: Header,

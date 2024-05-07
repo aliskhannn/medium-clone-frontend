@@ -14,6 +14,7 @@ import Delimiter from '@editorjs/delimiter'
 import InlineCode from '@editorjs/inline-code'
 import SimpleImage from '@editorjs/simple-image'
 import Paragraph from '@editorjs/paragraph'
+import { API_URL } from '../http'
 
 export const EDITOR_JS_TOOLS = {
 	embed: Embed,
@@ -27,27 +28,30 @@ export const EDITOR_JS_TOOLS = {
 		class: Image,
 		config: {
 			endpoints: {
-				byFile: 'http://localhost:5173/uploadFile', // Your backend file uploader endpoint
-				byUrl: 'http://localhost:5173/fetchUrl', // Your endpoint that provides uploading by Url
+				byFile: `${API_URL}/upload`, // Your backend file uploader endpoint
+				byUrl: `${API_URL}/fetchUrl`, // Your endpoint that provides uploading by Url
+			},
+			additionalRequestHeaders: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`
 			}
 		}
 	},
 	raw: Raw,
 	header: {
 		class: Header,
+		inlineToolbar: true,
 		config: {
-			// placeholder: 'Title',
+			placeholder: "Title",
 			levels: [1, 2, 3, 4, 5, 6],
 			defaultLevel: 1
 		},
-		inlineToolbar: true,
 	},
 	paragraph: {
 		class: Paragraph,
-		config: {
-			// placeholder: 'Tell your story...'
-		},
 		inlineToolbar: true,
+		config: {
+			placeholder: 'Let`s write an awesome story!'
+		},
 	},
 	quote: Quote,
 	checklist: CheckList,

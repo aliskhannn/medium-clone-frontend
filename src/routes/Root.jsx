@@ -8,11 +8,17 @@ const Root = () => {
   const [query, setQuery] = useState("");
   const [contentIsNotEmpty, setContentIsNotEmpty] = useState(false);
   const [title, setTitle] = useState("");
+  const [userData, setUserData] = useState({
+    id: null,
+    username: "",
+    fullName: "",
+    email: "",
+    bio: "",
+    avatarUrl: "",
+  });
 
   const ejInstance = useRef();
-
-  let data = useRef({});
-  let postCreatedDate = useRef("");
+  const titleEl = useRef();
 
   return (
     <RootContext.Provider
@@ -20,18 +26,19 @@ const Root = () => {
         query,
         setQuery,
         ejInstance,
-        data,
-        postCreatedDate,
         title,
-				setTitle,
+        setTitle,
+        titleEl,
         contentIsNotEmpty,
         setContentIsNotEmpty,
+        userData,
+        setUserData,
       }}
     >
-      <div>
+      <div className='h-full'>
         <Header />
-        <div>
-          <div className="wrapper">
+        <div className='h-full'>
+          <div className='wrapper h-full'>
             <Outlet />
           </div>
         </div>

@@ -1,26 +1,21 @@
-import PostsItem from "./PostsItem";
+import PostItem from "./PostItem";
 import "react-loading-skeleton/dist/skeleton.css";
-import PostSkeleton from "./UI/skeleton/PostSkeleton";
+import { Empty } from "antd";
 
-const PostsList = ({ posts, status, error }) => {
-  // <div className="loader w-14 p-2 rounded-full bg-indigo-600"></div>
+const PostsList = ({ posts }) => {
 
   return (
-    <div className="flex justify-center">
-      {status === "loading" ? (
-        <div className="flex items-center flex-col gap-12 w-full">
-          {[...Array(1, 2, 3)].map((n) => (
-            <PostSkeleton key={n} />
-          ))}
-        </div>
-      ) : status === "succeeded" ? (
-        <ul className="posts-list flex items-center flex-col gap-12 w-full">
+    <div className='flex justify-center'>
+      {posts.length ? (
+        <ul className='posts-list flex items-center flex-col gap-12 w-full'>
           {posts.map((post) => (
-            <PostsItem key={post.id} post={post} />
+            <PostItem key={post._id} post={post} />
           ))}
         </ul>
       ) : (
-        <div>{error}</div>
+        <div>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        </div>
       )}
     </div>
   );

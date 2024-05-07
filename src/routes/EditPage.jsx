@@ -1,47 +1,33 @@
-import EditorJS from "@editorjs/editorjs";
 import { useContext, useEffect } from "react";
 import { useRef } from "react";
-import { EDITOR_JS_TOOLS } from "../tools/tools";
-import { useDispatch } from "react-redux";
-import { getUserById } from "../store/slices/users/usersSlice";
 import { RootContext } from "./Root";
+import { useParams } from "react-router-dom";
+import useMessage from "./../hooks/useMessage";
+import axios from "../http/index";
+import useObserver, { config } from "../hooks/useObserver";
+import useEditor from "../hooks/useEditor";
 
 const EditPage = () => {
-  const {
-    ejInstance,
-    title,
-    setTitle,
-    contentIsNotEmpty,
-    setContentIsNotEmpty,
-  } = useContext(RootContext);
+  const { id } = useParams();
+  const { ejInstance, titleEl, setTitle, setContentIsNotEmpty } = useContext(RootContext);
+  const { initEditorJS } = useEditor("editorjs", ejInstance, "post", setContentIsNotEmpty);
+  const observer = useObserver(titleEl, setTitle);
+  const { error } = useMessage();
 
-  const dispatch = useDispatch();
+  const isEditing = Boolean(id);
 
-  const titleEl = useRef();
+  let editorData;
 
-  const config = {
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true,
-  };
+  const initEditor = async () => {
+    if (isEditing) {
+      editorData = await axios.get(`/posts/${id}`).catch((err) => {
+        error("Error getting post");
+      });
+      titleEl.current.innerHTML = editorData?.data?.title;
+      setTitle(editorData?.data?.title);
+    }
 
-  const initEditor = () => {
-    const editor = new EditorJS({
-      holder: "editorjs",
-      tools: EDITOR_JS_TOOLS,
-      data: {},
-      placeholder: "Let`s write an awesome story!",
-      defaultBlock: "paragraph",
-      onReady: () => {
-        ejInstance.current = editor;
-      },
-      onChange: async (api, event) => {
-        let content = await api.saver.save();
-        if (content.blocks.length) setContentIsNotEmpty(true);
-        else setContentIsNotEmpty(false);
-      },
-    });
+    initEditorJS(editorData, isEditing);
   };
 
   useEffect(() => {
@@ -51,37 +37,22 @@ const EditPage = () => {
 
     observer.observe(titleEl.current, config);
 
-    dispatch(getUserById(8));
-
     return () => {
       ejInstance?.current?.destroy();
       ejInstance.current = null;
     };
   }, []);
 
-  const callback = (mutationList) => {
-    for (const mutation of mutationList) {
-      if (mutation.type === "characterData") {
-        setTitle(titleEl.current.innerHTML);
-      } else if (mutation.type === "attributes") {
-        console.log(`The ${mutation.attributeName} attribute was modified.`);
-      }
-    }
-  };
-
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(callback);
-
   return (
-    <div className="edit-page pt-12">
-      <div className="container">
+    <div className='edit-page pt-12'>
+      <div className='container'>
         <h1
           ref={titleEl}
           contentEditable={true}
-          data-placeholder="Title"
-          className="font-bold"
+          data-placeholder='Title'
+          className='font-bold'
         ></h1>
-        <div id="editorjs" className="text-lg"></div>
+        <div id='editorjs' className='text-lg'></div>
       </div>
     </div>
   );

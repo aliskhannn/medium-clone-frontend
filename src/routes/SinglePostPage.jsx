@@ -1,23 +1,18 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import {
-  getPostById,
-  likePost,
-  selectSinglePost,
-} from "../store/slices/posts/postsSlice";
-import { useGetReadingTime } from "../hooks/useGetReadingTime";
-import { useGetFormattedDate } from "../hooks/useGetPostCreatedDate";
-import { useFormatNumber } from "../hooks/useFormatNumber";
-import {
-  HandThumbUpIcon,
-  ChatBubbleOvalLeftIcon,
-  BookmarkIcon,
-} from "@heroicons/react/24/outline";
-import { HandThumbUpIcon as HandThumbUpSolidIcon } from "@heroicons/react/24/solid";
+import { useNavigate, useParams } from "react-router-dom";
+import { getPost } from "../store/slices/postsSlice";
 import SinglePostPageSkeleton from "../components/UI/skeleton/SinglePostPageSkeleton";
-import { Tooltip } from "antd";
 import Output from "editorjs-react-renderer";
+import { getReadingTime } from "../utils/postItemHelpers";
+import { formatDate } from "./../utils/postItemHelpers";
+import PostActionBar from "../components/PostActionBar";
+import axios from "../http/index";
+import { selectUserData } from "../store/slices/authSlice";
+import { Avatar } from "antd";
+import { UserIcon } from "@heroicons/react/24/outline";
+import DrawerComponent from "../components/Drawer/DrawerComponent";
+import { getCommentsOnPost } from "../store/slices/commentsSlice";
 
 const styles = {
   paragraph: {
@@ -32,155 +27,139 @@ const styles = {
   },
 };
 
+export const PostContext = createContext();
+
 const SinglePostPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const [likes, setLikes] = useState(null);
-  const [liked, setLiked] = useState(false);
+  const [post, setPost] = useState({});
+  const [readingTime, setReadingTime] = useState(null);
+  const [postCreatedDate, setPostCreatedDate] = useState(null);
+  const [respondsCount, setRespondsCount] = useState(null);
+  const [likesCount, setLikesCount] = useState(null);
+  const [likedByUser, setLikedByUser] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const dispatch = useDispatch();
-  const post = useSelector(selectSinglePost);
-  const postStatus = useSelector((state) => state.posts.post.status);
-
-  const readingTime = 2;
-  const postCreatedDate = useGetFormattedDate(post?.created_date);
-  const likesCount = useFormatNumber(post?.likes);
+  const userData = useSelector(selectUserData);
+  const userStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
-    dispatch(getPostById(id));
-  }, []);
+    if (userStatus === "succeeded") {
+      dispatch(getPost(id)).then((post) => {
+        setPost(post.payload);
+        setReadingTime(getReadingTime(post?.payload?.content?.blocks));
+        setPostCreatedDate(formatDate(post?.payload?.createdAt));
+        setRespondsCount(post.payload.responds_count);
+        setLikesCount(post.payload.likes_count);
+        setLikedByUser(post?.payload?.likes.some((like) => like.user._id === userData?.user?.id));
+        setLoading(false);
+      });
+    }
+  }, [userStatus]);
 
-  const handleLike = () => {
-    dispatch(
-      likePost({
-        id: post.id,
-        likesCount: post.likes,
-        liked_by_user: post?.liked_by_user,
-      })
-    );
-    setLiked(!liked);
+  useEffect(() => {
+    if (openDrawer) {
+      dispatch(getCommentsOnPost(id));
+    }
+  }, [openDrawer]);
+
+  const handleLike = async (postId) => {
+    if (!likedByUser) {
+      await axios
+        .post(`/posts/${postId}/like`)
+        .then((response) => {
+          if (response.status === 200) {
+            setLikedByUser(true);
+            setLikesCount(likesCount + 1);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      await axios
+        .delete(`/posts/${postId}/like`)
+        .then((response) => {
+          if (response.status === 200) {
+            setLikedByUser(false);
+            setLikesCount(likesCount - 1);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const showDrawer = () => {
+    setOpenDrawer(true);
+    navigate(`/${id}/comments`);
+  };
+
+  const onClose = () => {
+    setOpenDrawer(false);
+    navigate(-1);
   };
 
   return (
-    <div className="post-page">
-      <div className="container">
-        <div className="py-20">
-          {postStatus === "loading" ? (
-            <SinglePostPageSkeleton />
-          ) : (
-            <div>
-              <h1 className="text-4xl font-bold">{post.title}</h1>
+    <PostContext.Provider value={{ respondsCount, setRespondsCount }}>
+      <div className='post-page'>
+        <div className='container'>
+          <div className='py-20'>
+            <DrawerComponent title='Responses' open={openDrawer} onClose={onClose} />
+            {loading ? (
+              <SinglePostPageSkeleton />
+            ) : (
+              <div>
+                <h1 className='text-4xl font-bold'>{post.title}</h1>
 
-              <div className="flex gap-3 mt-8">
-                <img
-                  className="inline-block h-12 w-12 rounded-full ring-2 ring-white"
-                  src={post?.user?.profile_image?.thumbnail}
-                  alt=""
+                <div className='flex gap-3 mt-8'>
+                  <Avatar
+                    src={post?.author?.avatarUrl}
+                    size={48}
+                    icon={<UserIcon className='h-6 w-6' />}
+                    className='flex items-center justify-center shrink-0'
+                  />
+                  <div>
+                    <span className='text-gray-950 text-base font-bold'>
+                      {post?.author?.fullName}
+                    </span>
+                    <div className='flex gap-1 text-gray-500'>
+                      <span>{readingTime} min read</span>
+                      <span>&#183;</span>
+                      <span>{postCreatedDate}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <PostActionBar
+                  post={post}
+                  likesCount={likesCount}
+                  likedByUser={likedByUser}
+                  handleLike={handleLike}
+                  showDrawer={showDrawer}
                 />
-                <div>
-                  <span className="text-gray-950 text-base font-bold">
-                    {post?.user?.name}
-                  </span>
-                  <div className="flex gap-1 text-gray-700">
-                    <span>{readingTime} min read</span>
-                    <span>&#183;</span>
-                    <span>{postCreatedDate}</span>
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex justify-between my-8 border-t-2 border-b-2 border-gray-100 py-4">
-                <div className="flex gap-4">
-                  <div className="flex items-center gap-1">
-                    <Tooltip placement="top" title="Like" mouseEnterDelay={0.5}>
-                      {post?.liked_by_user ? (
-                        <HandThumbUpSolidIcon
-                          onClick={handleLike}
-                          className="h-5 w-5 text-neutral-900 ease-in duration-100 cursor-pointer"
-                        />
-                      ) : (
-                        <HandThumbUpIcon
-                          onClick={handleLike}
-                          className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer"
-                        />
-                      )}
-                    </Tooltip>
-                    <Tooltip
-                      placement="top"
-                      title="View likes"
-                      mouseEnterDelay={0.5}
-                    >
-                      <span className="text-xs font-semibold text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer">
-                        {likesCount}
-                      </span>
-                    </Tooltip>
-                  </div>
-                  <Tooltip
-                    placement="top"
-                    title="Respond"
-                    mouseEnterDelay={0.5}
-                  >
-                    <div className="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 cursor-pointer">
-                      <ChatBubbleOvalLeftIcon className="h-5 w-5 ease-in duration-100" />
-                      <span className="text-xs font-semibold">23</span>
-                    </div>
-                  </Tooltip>
+                <div className='post-page-content'>
+                  <Output data={post?.content} style={styles} />
                 </div>
-                <Tooltip placement="top" title="Save" mouseEnterDelay={0.5}>
-                  <BookmarkIcon className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer" />
-                </Tooltip>
-              </div>
 
-              <div className="post-page-content">
-                <Output data={post.body} style={styles} />
+                <PostActionBar
+                  post={post}
+                  likesCount={likesCount}
+                  likedByUser={likedByUser}
+                  handleLike={handleLike}
+                  showDrawer={showDrawer}
+                />
               </div>
-
-              <div className="flex justify-between mt-8 border-t-2 border-b-2 border-gray-100 py-4">
-                <div className="flex gap-4">
-                  <div className="flex items-center gap-1">
-                    <Tooltip placement="top" title="Like" mouseEnterDelay={0.5}>
-                      {post?.liked_by_user ? (
-                        <HandThumbUpSolidIcon
-                          onClick={handleLike}
-                          className="h-5 w-5 text-neutral-900 ease-in duration-100 cursor-pointer"
-                        />
-                      ) : (
-                        <HandThumbUpIcon
-                          onClick={handleLike}
-                          className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer"
-                        />
-                      )}
-                    </Tooltip>
-                    <Tooltip
-                      placement="top"
-                      title="View likes"
-                      mouseEnterDelay={0.5}
-                    >
-                      <span className="text-xs font-semibold text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer">
-                        {likesCount}
-                      </span>
-                    </Tooltip>
-                  </div>
-                  <Tooltip
-                    placement="top"
-                    title="Respond"
-                    mouseEnterDelay={0.5}
-                  >
-                    <div className="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 cursor-pointer">
-                      <ChatBubbleOvalLeftIcon className="h-5 w-5 ease-in duration-100" />
-                      <span className="text-xs font-semibold">23</span>
-                    </div>
-                  </Tooltip>
-                </div>
-                <Tooltip placement="top" title="Save" mouseEnterDelay={0.5}>
-                  <BookmarkIcon className="h-5 w-5 text-neutral-500 hover:text-neutral-900 ease-in duration-100 cursor-pointer" />
-                </Tooltip>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </PostContext.Provider>
   );
 };
 

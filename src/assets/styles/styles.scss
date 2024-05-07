@@ -4,6 +4,8 @@
 
 $main-color: #4f46e5;
 $main-color-light: #6366f1;
+$main-color-400: rgb(129 140 248);
+$red: rgb(220 38 38);
 
 * {
   margin: 0;
@@ -36,6 +38,22 @@ ol {
 ul {
   list-style: disc;
 }
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+}
+input,
+input:hover,
+input:focus {
+  border-color: transparent;
+}
+div {
+  outline: none;
+}
 
 .container {
   max-width: 650px;
@@ -58,13 +76,36 @@ ul {
   .ce-paragraph {
     cursor: text;
   }
+}
 
-  [contenteditable="true"]:empty:not(:focus):before {
-    content: attr(data-placeholder);
-    color: grey;
-    pointer-events: none;
-    font-weight: normal;
+#commentEditorjs,
+#commentReplyEditorjs {
+  .ce-toolbar__actions {
+    display: none;
   }
+
+  .codex-editor__redactor {
+    padding-bottom: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .ce-block {
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
+
+.codex-editor--empty
+  .ce-block:first-child
+  .ce-paragraph[data-placeholder]:empty:focus::before {
+  opacity: 1;
+}
+
+[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: grey;
+  pointer-events: none;
+  font-weight: normal;
 }
 
 .post-page {
@@ -80,6 +121,96 @@ ul {
   a {
     pointer-events: none;
   }
+}
+
+.ant-upload-wrapper {
+  width: unset !important;
+}
+.avatar-uploader {
+  .ant-upload {
+    height: 64px !important;
+    width: 64px !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+}
+
+.modal-header {
+  text-align: center;
+
+  .ant-modal-title {
+    font-size: 1.3rem;
+  }
+}
+
+.modal-body {
+  margin-top: 30px;
+}
+
+.ant-btn {
+  background-color: transparent;
+
+  &:hover {
+    border-color: $main-color-light !important;
+    color: $main-color-light !important;
+  }
+}
+.ant-btn-primary {
+  color: #fff !important;
+  background-color: $main-color;
+
+  &:hover {
+    color: #fff !important;
+    background-color: $main-color-light !important;
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: $main-color-400 !important;
+  }
+}
+
+.ant-drawer .ant-drawer-header-title {
+  flex-direction: row-reverse;
+}
+
+.ant-popover .ant-popover-inner {
+  padding: 0;
+}
+
+body,
+.ant-drawer-body,
+.likes-list {
+  /* width */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+body {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+
+.eye-icon {
+	top: 18px
 }
 
 .loader {

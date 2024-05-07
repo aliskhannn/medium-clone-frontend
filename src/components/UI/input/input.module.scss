@@ -1,0 +1,23 @@
+.field {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid rgb(79 70 229) !important;
+  outline: none;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  outline: none;
+
+  &:focus {
+    outline: none !important;
+    border-color: rgb(79 70 229);
+    --tw-shadow: none;
+  }
+
+  &:hover {
+    border-color: rgb(99 102 241);
+  }
+}
+
+.error {
+	border-color: rgb(220 38 38) !important;
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "http://localhost:3000";
+export const API_URL = "https://riffle-posts-backend-8z087ng4q-aliskhan228s-projects.vercel.app";
 
 const instance = axios.create({
 	withCredentials: true,

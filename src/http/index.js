@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "https://riffle-posts-backend.vercel.app";
+export const API_URL = "http://localhost:8081";
 
 const instance = axios.create({
 	withCredentials: true,

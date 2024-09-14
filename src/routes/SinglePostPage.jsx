@@ -47,7 +47,7 @@ const SinglePostPage = () => {
   const userStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
-    if (userStatus === "succeeded") {
+    // if (userStatus === "succeeded") {
       dispatch(getPost(id)).then((post) => {
         setPost(post.payload);
         setReadingTime(getReadingTime(post?.payload?.content?.blocks));
@@ -57,8 +57,8 @@ const SinglePostPage = () => {
         setLikedByUser(post?.payload?.likes.some((like) => like.user._id === userData?.user?.id));
         setLoading(false);
       });
-    }
-  }, [userStatus]);
+    // }
+  }, []);
 
   useEffect(() => {
     if (openDrawer) {

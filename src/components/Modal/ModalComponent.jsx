@@ -2,7 +2,6 @@ import { useContext } from "react";
 import Form from "../UI/form/Form";
 import { SettingsContext } from "../../routes/Settings";
 import { Modal } from "antd";
-import { API_URL } from "../../http";
 import useUploadAvatar, { beforeUpload } from "../../hooks/useUploadAvatart";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { Avatar, Upload } from "antd";
@@ -46,7 +45,7 @@ const ModalComponent = () => {
                   listType='text'
                   className='avatar-uploader_text'
                   showUploadList={false}
-                  action={`${API_URL}/profile`}
+                  action={`${import.meta.env.VITE_API_URL}/profile`}
                   method='POST'
                   beforeUpload={beforeUpload}
                   onChange={onFileUpload}

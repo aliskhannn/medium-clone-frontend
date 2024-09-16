@@ -14,7 +14,6 @@ import Delimiter from '@editorjs/delimiter'
 import InlineCode from '@editorjs/inline-code'
 import SimpleImage from '@editorjs/simple-image'
 import Paragraph from '@editorjs/paragraph'
-import { API_URL } from '../http'
 
 export const EDITOR_JS_TOOLS = {
 	embed: Embed,
@@ -28,8 +27,8 @@ export const EDITOR_JS_TOOLS = {
 		class: Image,
 		config: {
 			endpoints: {
-				byFile: `${API_URL}/upload`, // Your backend file uploader endpoint
-				byUrl: `${API_URL}/fetchUrl`, // Your endpoint that provides uploading by Url
+				byFile: `${import.meta.env.VITE_API_URL}/upload`, // Your backend file uploader endpoint
+				byUrl: `${import.meta.env.VITE_API_URL}/fetchUrl`, // Your endpoint that provides uploading by Url
 			},
 			additionalRequestHeaders: {
 				Authorization: `Bearer ${localStorage.getItem('token')}`

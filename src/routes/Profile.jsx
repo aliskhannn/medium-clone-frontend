@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import { Avatar, ConfigProvider, Tabs, Upload } from "antd";
 import { CameraIcon, UserIcon } from "@heroicons/react/24/outline";
 import Loader from "../components/UI/loader/Loader";
-import { API_URL } from "../http";
 import useUploadAvatar, { beforeUpload } from "../hooks/useUploadAvatart";
 import { RootContext } from "./Root";
 
@@ -164,7 +163,7 @@ const Profile = () => {
                       loading ? "pointer-events-none cursor-default" : ""
                     }`}
                     showUploadList={false}
-                    action={`${API_URL}/profile`}
+                    action={`${import.meta.env.VITE_API_URL}/profile`}
                     method='POST'
                     beforeUpload={beforeUpload}
                     onChange={onFileUpload}

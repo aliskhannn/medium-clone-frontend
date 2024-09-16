@@ -1,8 +1,6 @@
 import { useContext, useState } from "react";
 import { message } from "antd";
 import { RootContext } from "../routes/Root";
-import { API_URL } from "../http";
-import { AppContext } from "../App";
 
 const getBase64 = (img, callback) => {
 	const reader = new FileReader();
@@ -46,7 +44,7 @@ const useUploadAvatar = (setSaveButtonIsVisible = null) => {
 		if (info.file.status === "done") {
 			setUserData({
 				...userData,
-				avatarUrl: `${API_URL}${info?.file?.response?.avatarUrl}`,
+				avatarUrl: `${import.meta.env.VITE_API_URL}${info?.file?.response?.avatarUrl}`,
 			});
 			if (setSaveButtonIsVisible) setSaveButtonIsVisible(true);
 		}

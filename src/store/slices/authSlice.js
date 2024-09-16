@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 import AuthService from "../../services/AuthService";
-import { API_URL } from "../../http";
 
 export const fetchRegister = createAsyncThunk('fetchRegister', async (params, { rejectWithValue }) => {
 	try {
@@ -38,7 +37,7 @@ export const updateProfile = createAsyncThunk('updateProfile', async (params) =>
 });
 
 export const checkAuth = createAsyncThunk('checkAuth', async () => {
-	const response = await axios.get(`${API_URL}/auth/refresh`, {
+	const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/refresh`, {
 		withCredentials: true
 	});
 	localStorage.setItem("token", response.data.accessToken);

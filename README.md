@@ -117,7 +117,7 @@
 2. Добавьте в этот файл следующую переменную окружения:
 
    ```
-   VITE_CLIENT_URL=https://medium-clone-backend-production.up.railway.app
+   VITE_API_URL=https://medium-clone-backend-production.up.railway.app
    ```
 
 ## Backend репозиторий

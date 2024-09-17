@@ -110,4 +110,4 @@
 
 ## Backend репозиторий
 
-Для корректной работы приложения необходимо запустить backend, который можно найти по следующей ссылке: [Medium Clone - Backend](https://github.com/Aliskhan228/medium-clone-backend.git)
+Эта frontend часть приложения работает в связке с backend, который можно найти по следующей ссылке: [Medium Clone - Backend](https://github.com/Aliskhan228/medium-clone-backend.git)

@@ -46,9 +46,9 @@ const Header = () => {
   };
 
   return (
-    <header className='h-16 w-full bg-white border-b-2 border-bg-gray-800'>
-      <div className='h-full w-3/4 mx-auto'>
-        <div className='flex items-center h-full'>
+    <header className='sm:h-16 w-full bg-white border-b-2 border-bg-gray-800'>
+      <div className='h-full px-4 py-4 sm:w-3/4 mx-auto'>
+        <div className='flex flex-wrap sm:flex-nowrap gap-5 sm:flex-row items-center h-full'>
           <Link to='/' className='shrink-0'>
             <img
               className='h-8 w-auto'
@@ -57,7 +57,7 @@ const Header = () => {
             />
           </Link>
           <div
-            className={`ml-6 relative ${
+            className={`order-3 sm:ml-6 sm:order-none relative w-full ${
               location.pathname === `/edit` ||
               location.pathname === `/${params.id}/edit`
                 ? "hidden"
@@ -73,7 +73,7 @@ const Header = () => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyPress}
               ref={inputRef}
-              className='search-input h-10 w-96 rounded pl-10 text-black bg-gray-100 border-none placeholder:text-gray-500 outline-none ease-in duration-100'
+              className='search-input h-10 w-full sm:w-96 rounded pl-10 text-black bg-gray-100 border-none placeholder:text-gray-500 outline-none ease-in duration-100'
             />
           </div>
           {!isAuth ? (

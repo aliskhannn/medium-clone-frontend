@@ -65,12 +65,12 @@ const Profile = () => {
   }
 
   return (
-    <div className='h-full w-3/4 mx-auto'>
+    <div className='h-full w-full px-4 sm:px-0 sm:w-3/4 mx-auto'>
       <div className='h-full flex items-center justify-center'>
         {status === "loading" ? (
           <Loader />
         ) : (
-          <div className='flex gap-28 h-full w-full'>
+          <div className='flex flex-col sm:flex-row gap-10 sm:gap-28 h-full w-full'>
             <div className='grow pt-16'>
               <h1 className='mb-14 text-4xl font-bold'>{userData.fullName}</h1>
               <ConfigProvider
@@ -93,7 +93,7 @@ const Profile = () => {
                       label: "Home",
                       children: (
                         <div className='flex mt-6 h-36'>
-                          <div className='flex flex-col gap-4 grow bg-gray-100 rounded-l py-5 px-10'>
+                          <div className='flex flex-col gap-4 grow bg-gray-100 rounded-l justify-center px-5 sm:py-5 sm:px-10'>
                             <div className='flex gap-2'>
                               <Avatar
                                 src={data?.user?.avatarUrl}
@@ -119,9 +119,9 @@ const Profile = () => {
                       label: "About",
                       children:
                         userData.bio !== "" ? (
-                          <div className='flex justify-between'>
+                          <div className='flex flex-col gap-5 sm:gap-0 sm:flex-row justify-between'>
                             <p>{userData.bio}</p>
-                            <button className='flex items-center self-center justify-center gap-1 h-10 w-28 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm ease-in duration-100'>
+                            <button className='flex items-center sm:self-center justify-center gap-1 h-10 w-28 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm ease-in duration-100'>
                               Edit
                             </button>
                           </div>
@@ -146,7 +146,7 @@ const Profile = () => {
                 />
               </ConfigProvider>
             </div>
-            <div className='w-1/3 shrink-0 border-r-bg-gray-800 border-l-2 pt-16 pl-10 h-full'>
+            <div className='w-full sm:w-1/3 shrink-0 sm:border-r-bg-gray-800 border-t-2 sm:border-l-2 pt-10 sm:pt-16 sm:pl-10 h-full'>
               <div className='flex items-center gap-6'>
                 {userData.avatarUrl ? (
                   <Avatar

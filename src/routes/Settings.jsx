@@ -142,14 +142,14 @@ const Settings = () => {
         isModalOpen,
       }}
     >
-      <div className='h-full w-3/4 mx-auto'>
+      <div className='h-full px-4 sm:w-3/4 mx-auto'>
         <div className='h-full flex items-center justify-center'>
           {status === "loading" ? (
             <Loader />
           ) : (
             <div className='h-full w-full pt-16'>
               <h1 className='mb-14 text-4xl font-bold'>Settings</h1>
-              <div className='w-1/2'>
+              <div className='sm:w-1/2'>
                 <ModalComponent />
                 <ConfigProvider
                   theme={{

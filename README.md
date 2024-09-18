@@ -123,3 +123,9 @@
 ## Backend репозиторий
 
 Эта frontend часть приложения работает в связке с backend, который можно найти по следующей ссылке: [Medium Clone - Backend](https://github.com/Aliskhan228/medium-clone-backend.git)
+
+## Автор
+
+Aliskhan – Frontend разработчик
+
+[GitHub](https://github.com/Aliskhan228)

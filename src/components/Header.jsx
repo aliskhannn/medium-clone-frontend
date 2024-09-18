@@ -57,7 +57,7 @@ const Header = () => {
             />
           </Link>
           <div
-            className={`order-3 sm:ml-6 sm:order-none relative w-full ${
+            className={`order-3 sm:ml-6 sm:order-none relative w-full sm:w-[384px] ${
               location.pathname === `/edit` ||
               location.pathname === `/${params.id}/edit`
                 ? "hidden"
